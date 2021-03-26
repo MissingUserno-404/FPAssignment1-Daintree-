@@ -2,15 +2,17 @@ import java.util.*;
 
 public class BookStore {
 
-    static Book[] bookList = new Book[5];
+    static ArrayList<Book> bookArray = new ArrayList<Book>();
+
+    static ArrayList<Book> shoppingCart = new ArrayList<Book>();
     
     public static void main(String[] args){
 
-        bookList[0] = new Book("Absolute Java" , "Savitch", 5, true);
-        bookList[1] = new Book("JAVA:How to Program", "Deitel and Deitel", 0, true);
-        bookList[2] = new Book("Computing Concepts with JAVA 8 Essentials", "(Horstman)", 5, false);
-        bookList[3] = new Book("Java Software Solutions", "Lewis and Loftus", 5, false);
-        bookList[4] = new Book("Java Program Design", "Cohoon and Davidson", 1, true);
+        bookArray.add(new Book("Absolute Java" , "Savitch", 5, true));
+        bookArray.add(new Book("JAVA:How to Program", "Deitel and Deitel", 0, true));
+        bookArray.add(new Book("Computing Concepts with JAVA 8 Essentials", "(Horstman)", 5, false));
+        bookArray.add(new Book("Java Software Solutions", "Lewis and Loftus", 5, false));
+        bookArray.add(new Book("Java Program Design", "Cohoon and Davidson", 1, true));
 
         Scanner SC = new Scanner(System.in);
         int selection = 0;
@@ -27,7 +29,7 @@ public class BookStore {
                 } else {
                     RunSelectUI(selection);
                 }
-
+            
             } else {
                 System.out.println("Invalid selection");
             }
@@ -53,25 +55,21 @@ public class BookStore {
                 break;
 
             case 5:
-                PrintAllBooks(bookList);
+                PrintAllBooks(bookArray);
                 break;
 
             default:
                 System.out.println("Error: Invalid option in RunSelectUI method");
         }
-
     }
 
-    public static int FindBook(String searchString){
-        for (int i = 0; i < bookList.length; i++){
-            
-        }
-    }
+    
 
-    public static void PrintAllBooks(Book[] list){
-        for(int i = 0; i < bookList.length; i++){
-            System.out.println(list[i].getTitle());
+    public static void PrintAllBooks(ArrayList<Book> list){
+        for(int i = 0; i < list.size(); i++){
+            System.out.println(list.get(i).getTitle());
         }
+        System.out.println();
     }
 
     public static void PrintMainUI(){
@@ -99,4 +97,18 @@ public class BookStore {
         return validity;
     }
 
+    //TODO
+    public static void FindBook(String searchString){
+        boolean found = false;
+
+        for (int i = 0; i < bookArray.size(); i++){
+            if (searchString.contains(searchString)) {
+                System.out.println(i + ": " + bookArray.get(i).getTitle());
+            }
+        }
+
+        if (found == false) {
+            System.out.println("There is no title starting with that");
+        }
+    }
 }
